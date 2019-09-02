@@ -1,0 +1,17 @@
+{
+  "web": {
+    "baseUrl": "http://localhost/mantis/index.php",
+    "username": "administrator",
+    "password": "root"
+  },
+  "webadmin": {
+    "username": "administrator",
+    "password": "root"
+  },
+  "DB": {
+    "host": "localhost",
+    "name": "bugtracker",
+    "user": "root",
+    "password": ""
+  }
+}
