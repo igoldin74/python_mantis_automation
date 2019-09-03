@@ -1,5 +1,4 @@
-
-
+import random
 from model.project import Project
 
 
@@ -23,8 +22,28 @@ class ProjectHelper:
         wd.find_element_by_css_selector("input[value='Add Project']").click()
         self.project_cache = None
 
-    def delete_new_project(self):
-        pass
+    def delete_random_project(self):
+        wd = self.app.wd
+        self.app.navigation.open_manage_page()
+        self.open_all_projects_page()
+        projects = wd.find_elements_by_css_selector('[href*="manage_proj_edit_page.php?project_id="]')
+        random.choice(projects).click()
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        self.project_cache = None
+
+    def delete_project_by_id(self, id):
+        wd = self.app.wd
+        self.app.navigation.open_manage_page()
+        self.open_all_projects_page()
+        self.select_project_by_id(id)
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        wd.find_element_by_css_selector("input[value='Delete Project']").click()
+        self.project_cache = None
+
+    def select_project_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector('[href="manage_proj_edit_page.php?project_id=%s"]' % id).click()
 
     def fill_out_project_form(self, project):
         self.app.type("name", project.name)
