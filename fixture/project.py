@@ -1,4 +1,5 @@
 import random
+import re
 from model.project import Project
 
 
@@ -63,5 +64,13 @@ class ProjectHelper:
                          .get_attribute('href')[-2:].replace('=', '0'))
                 name = element.find_element_by_css_selector('td:nth-of-type(1)').text
                 description = element.find_element_by_css_selector('td:nth-of-type(5)').text
-                self.project_cache.append(Project(id=proj_id, name=name, description=description))
+                if description == "":
+                    description = None
+                self.project_cache.append(Project(id=proj_id, name=self.clear(name), description=self.clear(description)))
         return list(self.project_cache)
+
+    def clear(self, s):
+        if s is None:
+            pass
+        else:
+            return re.sub("[() -]", "", s)

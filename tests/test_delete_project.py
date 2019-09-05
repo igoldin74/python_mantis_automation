@@ -17,5 +17,5 @@ def test_delete_project(app):
     project = random.choice(old_project_list)
     app.project.delete_project_by_id(project.id)
     old_project_list.remove(project)
-    new_project_list = app.project.get_project_list_from_ui()
-    assert sorted(new_project_list, key=Project.id_or_max) == sorted(old_project_list, key=Project.id_or_max)
+    project_list_soap = app.soap.get_proj_list_from_api("administrator", "root")
+    assert sorted(project_list_soap, key=Project.id_or_max) == sorted(old_project_list, key=Project.id_or_max)

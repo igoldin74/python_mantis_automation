@@ -2,6 +2,7 @@ from selenium import webdriver
 from fixture.session import SessionHelper
 from fixture.navigation import NaviHelper
 from fixture.project import ProjectHelper
+from fixture.soap import SoapHelper
 
 
 class Application:
@@ -18,6 +19,7 @@ class Application:
         self.session = SessionHelper(self, baseurl=baseurl)
         self.navigation = NaviHelper(self)
         self.project = ProjectHelper(self)
+        self.soap = SoapHelper(self)
 
     def destroy(self):
         self.wd.quit()
