@@ -6,7 +6,7 @@ from fixture.soap import SoapHelper
 
 
 class Application:
-    def __init__(self, browser, baseurl):
+    def __init__(self, browser, config):
         if browser == 'firefox':
             self.wd = webdriver.Firefox()
         elif browser == 'chrome':
@@ -16,9 +16,11 @@ class Application:
         else:
             raise ValueError("Unrecognized browser %s" % browser)
         self.wd.implicitly_wait(5)
-        self.session = SessionHelper(self, baseurl=baseurl)
+        self.session = SessionHelper(self, baseurl=config["web"]["base_url"])
         self.navigation = NaviHelper(self)
         self.project = ProjectHelper(self)
+        # Passing config file to application:
+        self.config = config
         self.soap = SoapHelper(self)
 
     def destroy(self):

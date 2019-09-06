@@ -10,14 +10,17 @@ from fixture.db import DbFixture
 fixture = None
 target = None
 
+@pytest.fixture(scope="session")
+def config(request):
+    return load_config(request.config.getoption("--target"))
+
 @pytest.fixture
-def app(request):
+def app(request, config):
     global fixture
     global target
     browser = request.config.getoption('--browser')
-    web_config = load_config(request.config.getoption("--target"))["web"]
     if fixture is None or fixture.is_not_valid():
-        fixture = Application(browser=browser, baseurl=web_config["baseUrl"])
+        fixture = Application(browser=browser, config=config)
     return fixture
 
 

@@ -1,7 +1,7 @@
 {
   "web": {
-    "baseUrl": "http://localhost/mantis/index.php",
-    "username": "administrator",
+    "base_url": "http://localhost/mantis/index.php",
+    "user": "administrator",
     "password": "root"
   },
   "webadmin": {
@@ -13,5 +13,10 @@
     "name": "bugtracker",
     "user": "root",
     "password": ""
+  },
+  "SOAP": {
+    "host": "http://localhost/mantis/api/soap/mantisconnect.php?wsdl",
+    "user": "administrator",
+    "password": "root"
   }
 }
